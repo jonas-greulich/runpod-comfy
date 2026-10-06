@@ -1,0 +1,14 @@
+# Profil "bild": SDXL-Familie für comic_panels
+# Format: <quelle>  <zielordner unter models/>  <dateiname>
+# Quellen: hf:<repo>/<pfad>  |  civitai:<modelVersionId>  |  https://…
+# hf-Downloads nutzen HF_TOKEN, civitai-Downloads CIVITAI_TOKEN (Env-Vars beim Pod-Start)
+
+hf:RunDiffusion/Juggernaut-X-v10/Juggernaut-X-RunDiffusion-NSFW.safetensors   checkpoints   Juggernaut_X_RunDiffusion.safetensors
+
+# Annahme: 952743 = v6.0, in der Civitai-URL prüfen
+civitai:952743   checkpoints   waiANIHENTAIPONYXL_v60.safetensors
+
+# WAI-Illustrious: Version-ID noch offen
+# civitai:XXXXXX   checkpoints   waiIllustriousSDXL.safetensors
+
+hf:BoRnNo0b/files-mirror/ESRGAN/4x_NMKD-Superscale-SP_178000_G.pth   upscale_models/upscalers_v10/general   4x_NMKD-Superscale-SP_178000_G.pth

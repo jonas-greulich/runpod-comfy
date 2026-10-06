@@ -1,0 +1,9 @@
+# Repo-URL  Commit
+# Gilt für alle Profile. Neue Nodes hier ergänzen → GitHub baut das Image neu.
+https://github.com/ltdrdata/ComfyUI-Manager.git                 855a0f50ecc842adacab08aa24d8655a742fae40
+https://github.com/ltdrdata/was-node-suite-comfyui.git          44de705818d4663fefefde57ffe0ea5a9ea39df4
+https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes.git     d78b780ae43fcf8c6b7c6505e6ffb4584281ceca
+https://github.com/ALatentPlace/ComfyUI_yanc.git                923c366c2937cf6ce55e8a808e29f23831281bb5
+https://github.com/ClownsharkBatwing/RES4LYF.git                56e44755d866c87ff9cb4b6608c8e42155db6ecc
+https://github.com/rgthree/rgthree-comfy.git                    d7297b42f0fa78bec1c0411478f887423c249502
+https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git     4d907bee61e92c2e65af3bd6383a4e4d356126d1
