@@ -11,4 +11,4 @@ civitai:952743   checkpoints   waiANIHENTAIPONYXL_v60.safetensors
 # WAI-Illustrious: Version-ID noch offen
 # civitai:XXXXXX   checkpoints   waiIllustriousSDXL.safetensors
 
-hf:BoRnNo0b/files-mirror/ESRGAN/4x_NMKD-Superscale-SP_178000_G.pth   upscale_models/upscalers_v10/general   4x_NMKD-Superscale-SP_178000_G.pth
+hf:uwg/upscaler/ESRGAN/4x_NMKD-Superscale-SP_178000_G.pth   upscale_models/upscalers_v10/general   4x_NMKD-Superscale-SP_178000_G.pth

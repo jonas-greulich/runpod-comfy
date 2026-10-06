@@ -46,8 +46,16 @@ download() {
     return 0
   fi
   log "lade ${dir}/${name}"
-  aria2c --console-log-level=warn --summary-interval=30 -x 16 -s 16 -k 1M \
-    "${hdr[@]}" -d "${MODELS_DIR}/${dir}" -o "${name}" "$url"
+  if [[ "$src" == civitai:* ]]; then
+    # Civitai leitet auf einen signierten Storage-Link um. aria2c schickt den
+    # Authorization-Header dorthin mit, der Storage antwortet dann mit 400.
+    # curl lässt den Header bei Umleitung auf einen anderen Host weg.
+    curl -fL --retry 3 -o "${MODELS_DIR}/${dir}/${name}.part" "${hdr[@]/--header=/-H}" "$url" \
+      && mv "${MODELS_DIR}/${dir}/${name}.part" "${MODELS_DIR}/${dir}/${name}"
+  else
+    aria2c --console-log-level=warn --summary-interval=30 -x 16 -s 16 -k 1M \
+      "${hdr[@]}" -d "${MODELS_DIR}/${dir}" -o "${name}" "$url"
+  fi
 }
 
 if [[ ! -f "$PROFILE_FILE" ]]; then
