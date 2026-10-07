@@ -1,0 +1,11 @@
+# Profil "ltx": LTX-2.5 (Lightricks, 08/2026), offizielle ComfyUI-Vorlagen T2V, I2V, FLF2V
+# Format: <quelle>  <zielordner unter models/>  <dateiname>
+# Alle Nodes sind in ComfyUI (v0.39.1) eingebaut, kein Custom Node nötig.
+# Empfohlene GPU: RTX PRO 6000 (96 GB). Container-Disk: 80 GB.
+
+hf:Lightricks/LTX-2.5/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors   diffusion_models   ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors
+hf:Lightricks/LTX-2.5/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors   text_encoders   gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors
+hf:Comfy-Org/gemma-4/text_encoders/gemma4_e2b_it_int8_convrot.safetensors   text_encoders   gemma4_e2b_it_int8_convrot.safetensors
+hf:Lightricks/LTX-2.5/vae/ltx-2.5-video-vae-bf16.safetensors   vae   ltx-2.5-video-vae-bf16.safetensors
+hf:Lightricks/LTX-2.5/vae/ltx-2.5-audio-vae-bf16.safetensors   vae   ltx-2.5-audio-vae-bf16.safetensors
+hf:Lightricks/LTX-2.5/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors   latent_upscale_models   ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors
