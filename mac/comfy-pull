@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""comfy-pull: holt alle fertigen Ergebnisse (Bilder, Videos, Audio) von laufenden
+RunPod-ComfyUI-Pods nach ~/PROJEKTE/runpod/output/<Datum>/<Pod-Name>/.
+
+Aufruf:
+  comfy-pull --daemon         Dauerbetrieb (so startet ihn launchd beim Login):
+                              findet laufende Pods selbst, wartet, wenn keiner läuft
+  comfy-pull                  einmal alle laufenden Pods mit Port 8188 (braucht API-Key)
+  comfy-pull <POD-ID>         einmal nur dieser Pod (kein API-Key nötig)
+  comfy-pull --watch [<ID>]   wiederholt alle 15 s im Terminal, bis Ctrl+C
+
+Bereits geladene Dateien merkt sich comfy-pull in ~/.config/comfy-pull/<pod>.txt.
+Du kannst Dateien im Zielordner also verschieben, umbenennen oder löschen, sie
+kommen nicht noch einmal. Läuft nur über HTTPS (RunPod-Proxy), SSH ist nicht nötig.
+
+Zielordner ändern: Env COMFY_PULL_DEST.
+RunPod-API-Key einmalig im Schlüsselbund ablegen:
+  security add-generic-password -s runpod -a api -w
+"""
+import argparse
+import datetime
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+API_PODS = "https://rest.runpod.io/v1/pods"
+UA = "Mozilla/5.0 (Macintosh) comfy-pull/1.1"
+DEST_ROOT = os.path.expanduser(os.environ.get("COMFY_PULL_DEST", "~/PROJEKTE/runpod/output"))
+STATE_DIR = os.path.expanduser("~/.config/comfy-pull")
+MISSING = set()   # in der History, aber auf dem Pod gelöscht
+REPORTED = set()  # Pods, für die die Zusammenfassung schon einmal kam
+LOCKS = {}        # pod_id -> offenes Lock-File
+
+
+class NoKey(Exception):
+    pass
+
+
+def log(msg):
+    print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {msg}", flush=True)
+
+
+def notify(title, text):
+    """macOS-Mitteilung, nur im Daemon-Betrieb."""
+    script = f'display notification {json.dumps(text)} with title {json.dumps(title)}'
+    subprocess.run(["osascript", "-e", script], capture_output=True)
+
+
+def load_state(pod_id):
+    os.makedirs(STATE_DIR, exist_ok=True)
+    path = os.path.join(STATE_DIR, f"{pod_id}.txt")
+    if not os.path.exists(path):
+        return path, set()
+    with open(path, encoding="utf-8") as f:
+        return path, {line.rstrip("\n") for line in f if line.strip()}
+
+
+def try_lock(pod_id):
+    """True, wenn dieser Prozess den Pod bearbeiten darf (kein zweiter comfy-pull dran)."""
+    import fcntl
+    if pod_id in LOCKS:
+        return True
+    os.makedirs(STATE_DIR, exist_ok=True)
+    fh = open(os.path.join(STATE_DIR, f"{pod_id}.lock"), "w")
+    try:
+        fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        fh.close()
+        return False
+    LOCKS[pod_id] = fh
+    return True
+
+
+def http_get(url, headers=None, timeout=60):
+    req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
+    return urllib.request.urlopen(req, timeout=timeout)
+
+
+def api_key():
+    key = os.environ.get("RUNPOD_API_KEY")
+    if key:
+        return key.strip()
+    try:
+        out = subprocess.run(
+            ["security", "find-generic-password", "-s", "runpod", "-a", "api", "-w"],
+            capture_output=True, text=True, check=True)
+        return out.stdout.strip() or None
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+
+
+def running_pods():
+    key = api_key()
+    if not key:
+        raise NoKey("Kein RunPod-API-Key. Ablegen mit: security add-generic-password -s runpod -a api -w")
+    with http_get(API_PODS, {"Authorization": f"Bearer {key}"}) as r:
+        data = json.load(r)
+    pods = data if isinstance(data, list) else data.get("pods", data.get("data", []))
+    result = []
+    for p in pods:
+        status = str(p.get("desiredStatus", "")).upper()
+        ports = " ".join(map(str, p.get("ports") or []))
+        if status == "RUNNING" and "8188" in ports:
+            result.append((p["id"], p.get("name") or p["id"]))
+    return result
+
+
+def outputs(base):
+    """Alle Ausgabedateien aus der ComfyUI-History des Pods."""
+    url = f"{base}/history?max_items=100000&_={int(time.time() * 1000)}"
+    with http_get(url, {"Cache-Control": "no-cache", "Pragma": "no-cache"}) as r:
+        hist = json.load(r)
+    files = {}
+    for entry in hist.values():
+        for node_out in (entry.get("outputs") or {}).values():
+            for items in node_out.values():
+                if not isinstance(items, list):
+                    continue
+                for it in items:
+                    if isinstance(it, dict) and it.get("filename") and it.get("type", "output") == "output":
+                        files[(it.get("subfolder") or "", it["filename"])] = it
+    return sorted(files)
+
+
+def pull(pod_id, name, quiet_offline=False):
+    base = f"https://{pod_id}-8188.proxy.runpod.net"
+    day = datetime.date.today().isoformat()
+    dest = os.path.join(DEST_ROOT, day, name.replace("/", "_"))
+    try:
+        files = outputs(base)
+    except (urllib.error.URLError, OSError, ValueError) as e:
+        if not quiet_offline:
+            log(f"[{name}] ComfyUI noch nicht erreichbar ({getattr(e, 'code', None) or getattr(e, 'reason', e)}).")
+        return 0
+    new = gone = 0
+    state_path, done = load_state(pod_id)
+
+    def remember(key):
+        done.add(key)
+        with open(state_path, "a", encoding="utf-8") as sf:
+            sf.write(key + "\n")
+
+    for subfolder, filename in files:
+        target = os.path.join(dest, subfolder, filename)
+        key = f"{subfolder}/{filename}"
+        if key in done:
+            continue
+        if os.path.isfile(target) and os.path.getsize(target) > 0:
+            remember(key)
+            continue
+        if (pod_id, subfolder, filename) in MISSING:
+            gone += 1
+            continue
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        q = urllib.parse.urlencode({"filename": filename, "subfolder": subfolder, "type": "output"})
+        tmp = target + ".part"
+        try:
+            with http_get(f"{base}/view?{q}", timeout=600) as r, open(tmp, "wb") as f:
+                while chunk := r.read(1 << 20):
+                    f.write(chunk)
+            os.replace(tmp, target)
+            remember(key)
+            new += 1
+            log(f"[{name}] {os.path.join(subfolder, filename)}")
+        except urllib.error.HTTPError as e:
+            if os.path.exists(tmp):
+                os.remove(tmp)
+            if e.code == 404:
+                MISSING.add((pod_id, subfolder, filename))
+                gone += 1
+            else:
+                log(f"[{name}] FEHLER bei {filename}: {e}")
+        except (urllib.error.URLError, OSError) as e:
+            log(f"[{name}] FEHLER bei {filename}: {e}")
+            if os.path.exists(tmp):
+                os.remove(tmp)
+    if new or pod_id not in REPORTED:
+        extra = f", {gone} auf dem Pod nicht mehr vorhanden" if gone else ""
+        log(f"[{name}] {new} neu{extra} -> {dest}")
+        REPORTED.add(pod_id)
+    return new
+
+
+def daemon(interval, idle):
+    """Endlosschleife für launchd. Bricht nie wegen Netz- oder API-Fehlern ab."""
+    log(f"comfy-pull Daemon gestartet, Ziel {DEST_ROOT}")
+    last_problem = None
+    active = set()
+    while True:
+        try:
+            pods = running_pods()
+            last_problem = None
+        except Exception as e:  # NoKey, HTTP 401, Netz weg
+            if str(e) != last_problem:
+                log(f"RunPod-API: {e}")
+                last_problem = str(e)
+            time.sleep(idle)
+            continue
+        ids = {p for p, _ in pods}
+        for gone_id in active - ids:
+            log(f"[{gone_id}] Pod läuft nicht mehr")
+            REPORTED.discard(gone_id)
+        for pod_id, name in pods:
+            if pod_id not in active:
+                log(f"[{name}] Pod gefunden ({pod_id})")
+            if not try_lock(pod_id):  # gerade läuft ein manueller comfy-pull dafür
+                continue
+            try:
+                n = pull(pod_id, name, quiet_offline=pod_id in active)
+                if n:
+                    notify("comfy-pull", f"{n} neue Datei(en) von {name}")
+            except Exception as e:
+                log(f"[{name}] Durchlauf fehlgeschlagen ({e})")
+        active = ids
+        time.sleep(interval if pods else idle)
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Ergebnisse von RunPod-ComfyUI-Pods holen")
+    ap.add_argument("--daemon", action="store_true", help="Dauerbetrieb für launchd")
+    ap.add_argument("--watch", action="store_true", help="wiederholt laufend, bis Ctrl+C")
+    ap.add_argument("--interval", type=int, default=15, metavar="SEK",
+                    help="Abstand bei laufenden Pods in Sekunden (Standard 15)")
+    ap.add_argument("--idle", type=int, default=60, metavar="SEK",
+                    help="Abstand im Daemon, wenn kein Pod läuft (Standard 60)")
+    ap.add_argument("pod", nargs="?", help="Pod-ID, z. B. 3k4ipfi2hnhejm")
+    a = ap.parse_args()
+
+    if a.daemon:
+        daemon(a.interval, a.idle)
+        return
+
+    try:
+        pods = [(a.pod, a.pod)] if a.pod else running_pods()
+    except NoKey as e:
+        sys.exit(f"{e}\nOder Pod-ID angeben: comfy-pull <POD-ID>")
+    except urllib.error.HTTPError as e:
+        sys.exit(f"RunPod-API antwortet mit {e.code}. Key prüfen oder Pod-ID direkt angeben.")
+    if not pods:
+        sys.exit("Kein laufender Pod mit Port 8188 gefunden.")
+    for pod_id, _ in pods:
+        if not try_lock(pod_id):
+            sys.exit(f"comfy-pull läuft für {pod_id} schon (Terminal oder Hintergrunddienst).\n"
+                     "Der Hintergrunddienst holt die Dateien bereits, hier ist nichts zu tun.")
+    if a.watch:
+        log(f"Beobachte {', '.join(n for _, n in pods)} alle {a.interval} s. Beenden mit Ctrl+C.")
+
+    while True:
+        for pod_id, name in pods:
+            try:
+                pull(pod_id, name)
+            except Exception as e:
+                log(f"[{name}] Durchlauf fehlgeschlagen ({e}), nächster Versuch folgt")
+        if not a.watch:
+            break
+        time.sleep(a.interval)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nBeendet.")

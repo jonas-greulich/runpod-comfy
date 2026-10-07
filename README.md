@@ -2,6 +2,8 @@
 
 ComfyUI-Image für RunPod. Ein Image ohne Modelle; beim Pod-Start lädt `scripts/start.sh` die Modelle des gewählten Profils.
 
+**Übersicht über Templates, Modelle, Workflows und Ablauf: [KATALOG.md](KATALOG.md).**
+
 ## Aufbau
 
 | Pfad | Inhalt |
@@ -11,6 +13,7 @@ ComfyUI-Image für RunPod. Ein Image ohne Modelle; beim Pod-Start lädt `scripts
 | `profiles/<name>.txt` | Modell-Downloads pro Profil |
 | `workflows/<name>/` | Workflow-JSONs, landen beim Start im ComfyUI-Menü |
 | `scripts/start.sh` | SSH, Modell-Download, Workflows, ComfyUI-Start |
+| `mac/` | Mac-Skripte: `comfy-pull` (Ergebnisse holen), `lora-upload`, `install.sh` |
 
 ## Pod-Env-Vars
 
@@ -29,5 +32,5 @@ Push auf `main` → GitHub Action baut `ghcr.io/<owner>/runpod-comfy:latest` (li
 
 ```
 <quelle>  <zielordner unter models/>  <dateiname>
-hf:<repo>/<pfad>  |  civitai:<modelVersionId>  |  https://…
+hf:<repo>/<pfad>  |  civitai:<modelVersionId>  |  hfrepo:<repo> (ganzes Repo)  |  https://…
 ```

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Lädt alle eigenen LoRAs in das private Hugging-Face-Repo kosmonaut7/loras.
+# Bereits hochgeladene, unveränderte Dateien werden nicht erneut übertragen.
+# Voraussetzung: hf-CLI installiert und mit Schreib-Token angemeldet (hf auth login).
+set -euo pipefail
+
+REPO="kosmonaut7/loras"
+SRC="${1:-$HOME/ComfyUI/models/loras}"
+
+command -v hf >/dev/null || { echo "hf-CLI fehlt: brew install huggingface-cli"; exit 1; }
+[[ -d "$SRC" ]] || { echo "Ordner nicht gefunden: $SRC"; exit 1; }
+
+echo "Lade LoRAs aus $SRC nach $REPO (privat) ..."
+hf upload "$REPO" "$SRC" . \
+  --repo-type model --private \
+  --include "*.safetensors" \
+  --commit-message "LoRAs aktualisiert $(date +%Y-%m-%d)"
+echo "Fertig. Neue Pods laden die LoRAs automatisch nach models/loras."
