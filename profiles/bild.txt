@@ -12,3 +12,6 @@ civitai:952743   checkpoints   waiANIHENTAIPONYXL_v60.safetensors
 # civitai:XXXXXX   checkpoints   waiIllustriousSDXL.safetensors
 
 hf:uwg/upscaler/ESRGAN/4x_NMKD-Superscale-SP_178000_G.pth   upscale_models/upscalers_v10/general   4x_NMKD-Superscale-SP_178000_G.pth
+
+# Eigene LoRAs: ganzes privates Repo (Dateiname-Spalte entfällt)
+hfrepo:kosmonaut7/loras   loras

@@ -58,6 +58,24 @@ download() {
   fi
 }
 
+# Ganzes Hugging-Face-Repo laden (z. B. eigene LoRAs), Unterordner bleiben erhalten
+download_repo() {
+  local repo="$1" dir="$2" f sub
+  local -a hdr=()
+  [[ -n "${HF_TOKEN:-}" ]] && hdr=(-H "Authorization: Bearer ${HF_TOKEN}")
+  local list
+  list="$(curl -fsSL "${hdr[@]}" "https://huggingface.co/api/models/${repo}/tree/main?recursive=true" \
+    | python -c 'import json,sys; [print(e["path"]) for e in json.load(sys.stdin) if e.get("type")=="file" and not e["path"].startswith(".") and not e["path"].endswith((".md",".gitattributes"))]')" \
+    || { log "Repo nicht lesbar: ${repo}"; return 1; }
+  [[ -z "$list" ]] && { log "Repo leer: ${repo}"; return 0; }
+  local rc=0
+  while read -r f; do
+    sub="$(dirname "$f")"; [[ "$sub" == "." ]] && sub="" || sub="/${sub}"
+    download "hf:${repo}/${f}" "${dir}${sub}" "$(basename "$f")" || { log "FEHLER: ${f}"; rc=1; }
+  done <<<"$list"
+  return $rc
+}
+
 if [[ ! -f "$PROFILE_FILE" ]]; then
   log "Profil nicht gefunden: $PROFILE_FILE"
   exit 1
@@ -67,7 +85,11 @@ log "Profil: $PROFILE"
 failed=0
 while read -r src dir name; do
   [[ -z "${src:-}" || "$src" == \#* ]] && continue
-  download "$src" "$dir" "$name" || { log "FEHLER: $name"; failed=1; }
+  if [[ "$src" == hfrepo:* ]]; then
+    download_repo "${src#hfrepo:}" "$dir" || failed=1
+  else
+    download "$src" "$dir" "$name" || { log "FEHLER: $name"; failed=1; }
+  fi
 done < "$PROFILE_FILE"
 [[ $failed -eq 1 ]] && log "Nicht alle Modelle geladen, ComfyUI startet trotzdem"
 
