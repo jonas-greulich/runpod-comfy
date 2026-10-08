@@ -97,7 +97,7 @@ done < "$PROFILE_FILE"
 WF_DST="${COMFY_DIR}/user/default/workflows"
 mkdir -p "$WF_DST"
 if [[ -d "/opt/workflows/${PROFILE}" ]]; then
-  cp -n /opt/workflows/"${PROFILE}"/*.json "$WF_DST"/ 2>/dev/null || true
+  cp -f /opt/workflows/"${PROFILE}"/*.json "$WF_DST"/ 2>/dev/null || true
   log "Workflows aus /opt/workflows/${PROFILE} eingespielt"
 fi
 

@@ -1,22 +1,22 @@
 {
   "id": "977e9e30-609b-4edb-b3b6-a17072b04a4e",
   "revision": 0,
-  "last_node_id": 75,
-  "last_link_id": 121,
+  "last_node_id": 81,
+  "last_link_id": 141,
   "nodes": [
     {
       "id": 36,
       "type": "VAEDecode",
       "pos": [
-        2200.184279786138,
-        710.8697411420321
+        2260.0116979456966,
+        660.6422200276205
       ],
       "size": [
         140,
         46
       ],
       "flags": {},
-      "order": 25,
+      "order": 29,
       "mode": 4,
       "inputs": [
         {
@@ -55,21 +55,21 @@
       "id": 41,
       "type": "KSampler",
       "pos": [
-        1884.2240222418793,
-        710.2103579015934
+        1944.0514404014395,
+        659.9828367871818
       ],
       "size": [
         270,
         262
       ],
       "flags": {},
-      "order": 23,
+      "order": 27,
       "mode": 4,
       "inputs": [
         {
           "name": "model",
           "type": "MODEL",
-          "link": 58
+          "link": 137
         },
         {
           "name": "positive",
@@ -107,7 +107,7 @@
         }
       },
       "widgets_values": [
-        444600044162104,
+        591054391943628,
         "randomize",
         10,
         8,
@@ -120,8 +120,8 @@
       "id": 57,
       "type": "Text Multiline",
       "pos": [
-        2172.714507601207,
-        851.942174024851
+        2232.541925760765,
+        801.7146529104392
       ],
       "size": [
         210,
@@ -158,15 +158,15 @@
       "id": 56,
       "type": "CR Text Concatenate",
       "pos": [
-        2416.033105251607,
-        895.7888189828211
+        2475.8605234111656,
+        845.5612978684093
       ],
       "size": [
         270,
         78
       ],
       "flags": {},
-      "order": 17,
+      "order": 19,
       "mode": 4,
       "inputs": [
         {
@@ -214,8 +214,8 @@
       "id": 38,
       "type": "SaveImage",
       "pos": [
-        2442.476777789382,
-        757.4819121684684
+        2502.3041959489406,
+        707.2543910540568
       ],
       "size": [
         270,
@@ -224,7 +224,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 27,
+      "order": 31,
       "mode": 4,
       "inputs": [
         {
@@ -266,8 +266,8 @@
       "id": 59,
       "type": "Text Multiline",
       "pos": [
-        2312.4829725995337,
-        238.78248592713499
+        1952.6568232356835,
+        334.0450167472049
       ],
       "size": [
         210,
@@ -301,386 +301,6 @@
       ]
     },
     {
-      "id": 10,
-      "type": "Text Load Line From File",
-      "pos": [
-        734.7389052556609,
-        913.2285719702461
-      ],
-      "size": [
-        300,
-        180
-      ],
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "multiline_text",
-          "shape": 7,
-          "type": "STRING",
-          "link": 11
-        },
-        {
-          "name": "index",
-          "type": "INT",
-          "widget": {
-            "name": "index"
-          },
-          "link": 111
-        }
-      ],
-      "outputs": [
-        {
-          "name": "line_text",
-          "type": "STRING",
-          "slot_index": 0,
-          "links": [
-            109
-          ]
-        },
-        {
-          "name": "dictionary",
-          "type": "DICT",
-          "slot_index": 1,
-          "links": []
-        }
-      ],
-      "title": "10 · current_action (mode=index)",
-      "properties": {
-        "cnr_id": "was-ns",
-        "ver": "3.0.1",
-        "Node name for S&R": "Text Load Line From File",
-        "ue_properties": {
-          "widget_ue_connectable": {
-            "index": true
-          },
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "",
-        "[filename]",
-        "TextBatch",
-        "automatic",
-        56486287703718
-      ]
-    },
-    {
-      "id": 13,
-      "type": "Text Concatenate",
-      "pos": [
-        1204.234544103241,
-        411.7643689226635
-      ],
-      "size": [
-        320,
-        160
-      ],
-      "flags": {},
-      "order": 19,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text_a",
-          "shape": 7,
-          "type": "STRING",
-          "link": 93
-        },
-        {
-          "name": "text_b",
-          "shape": 7,
-          "type": "STRING",
-          "link": 94
-        },
-        {
-          "name": "text_c",
-          "shape": 7,
-          "type": "STRING",
-          "link": 109
-        },
-        {
-          "name": "text_d",
-          "shape": 7,
-          "type": "STRING",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "slot_index": 0,
-          "links": [
-            115,
-            116
-          ]
-        }
-      ],
-      "title": "13 · SYSTEM-Prompt (Regel + Basis)",
-      "properties": {
-        "cnr_id": "was-ns",
-        "ver": "3.0.1",
-        "Node name for S&R": "Text Concatenate",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        "_",
-        "true"
-      ]
-    },
-    {
-      "id": 58,
-      "type": "> Int to Text",
-      "pos": [
-        1223.703388215334,
-        637.190255166453
-      ],
-      "size": [
-        270,
-        132
-      ],
-      "flags": {},
-      "order": 12,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "int",
-          "type": "INT",
-          "link": 84
-        }
-      ],
-      "outputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "links": [
-            80,
-            82
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "ComfyUI_yanc",
-        "ver": "923c366c2937cf6ce55e8a808e29f23831281bb5",
-        "Node name for S&R": "> Int to Text",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        false,
-        0
-      ]
-    },
-    {
-      "id": 18,
-      "type": "CLIPTextEncode",
-      "pos": [
-        1568.3640680433753,
-        461.24692522086167
-      ],
-      "size": [
-        300,
-        140
-      ],
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 121
-        },
-        {
-          "name": "text",
-          "type": "STRING",
-          "widget": {
-            "name": "text"
-          },
-          "link": 8
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "slot_index": 0,
-          "links": [
-            45,
-            46,
-            47
-          ]
-        }
-      ],
-      "title": "18 · Negative Conditioning",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.21.1",
-        "Node name for S&R": "CLIPTextEncode",
-        "ue_properties": {
-          "widget_ue_connectable": {
-            "text": true
-          },
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        ""
-      ]
-    },
-    {
-      "id": 46,
-      "type": "EmptyLatentImage",
-      "pos": [
-        1571.093323909509,
-        656.8443680068636
-      ],
-      "size": [
-        270,
-        156
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "LATENT",
-          "type": "LATENT",
-          "links": [
-            54,
-            55
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.21.1",
-        "Node name for S&R": "EmptyLatentImage",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        640,
-        704,
-        1
-      ]
-    },
-    {
-      "id": 17,
-      "type": "CLIPTextEncode",
-      "pos": [
-        1952.282881703611,
-        250.7472440960245
-      ],
-      "size": [
-        300,
-        140
-      ],
-      "flags": {},
-      "order": 21,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 120
-        },
-        {
-          "name": "text",
-          "type": "STRING",
-          "widget": {
-            "name": "text"
-          },
-          "link": 116
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "slot_index": 0,
-          "links": [
-            42,
-            43,
-            44
-          ]
-        }
-      ],
-      "title": "17 · Positive Conditioning",
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.21.1",
-        "Node name for S&R": "CLIPTextEncode",
-        "ue_properties": {
-          "widget_ue_connectable": {
-            "text": true
-          },
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        ""
-      ]
-    },
-    {
-      "id": 64,
-      "type": "> Save Text",
-      "pos": [
-        1957.859223991971,
-        14.701889425174308
-      ],
-      "size": [
-        270,
-        102
-      ],
-      "flags": {},
-      "order": 20,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 115
-        },
-        {
-          "name": "filename_opt",
-          "shape": 7,
-          "type": "STRING",
-          "link": null
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "cnr_id": "ComfyUI_yanc",
-        "ver": "923c366c2937cf6ce55e8a808e29f23831281bb5",
-        "Node name for S&R": "> Save Text",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.8"
-        }
-      },
-      "widgets_values": [
-        "ComfyUI",
-        ""
-      ]
-    },
-    {
       "id": 47,
       "type": "Reroute",
       "pos": [
@@ -692,7 +312,7 @@
         26
       ],
       "flags": {},
-      "order": 14,
+      "order": 13,
       "mode": 4,
       "inputs": [
         {
@@ -705,11 +325,7 @@
         {
           "name": "",
           "type": "MODEL",
-          "links": [
-            57,
-            58,
-            59
-          ]
+          "links": []
         }
       ],
       "properties": {
@@ -764,136 +380,11 @@
       }
     },
     {
-      "id": 61,
-      "type": "SeedGenerator",
-      "pos": [
-        1154.6553700520112,
-        235.87348751078554
-      ],
-      "size": [
-        330.8974363561406,
-        102
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "SEED",
-          "type": "INT",
-          "links": [
-            84
-          ]
-        },
-        {
-          "name": "seed+1",
-          "type": "INT",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "RES4LYF",
-        "ver": "0dc91c00c4c3fb38e7874fcd7a2a327765e8882c",
-        "Node name for S&R": "SeedGenerator",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "widgets_values": [
-        397668533250712,
-        "fixed"
-      ],
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
-      "id": 43,
-      "type": "Fast Groups Bypasser (rgthree)",
-      "pos": [
-        -224.2635581283566,
-        242.71066346825148
-      ],
-      "size": [
-        334.59688954878595,
-        178
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "OPT_CONNECTION",
-          "type": "*",
-          "links": []
-        }
-      ],
-      "properties": {
-        "matchColors": "",
-        "matchTitle": "",
-        "showNav": true,
-        "showAllGraphs": true,
-        "sort": "position",
-        "customSortAlphabet": "",
-        "toggleRestriction": "default",
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "input_ue_unconnectable": {},
-          "version": "7.6.2"
-        }
-      },
-      "color": "#323",
-      "bgcolor": "#535"
-    },
-    {
-      "id": 69,
-      "type": "PrimitiveNode",
-      "pos": [
-        -193.0491001772776,
-        473.05013250481
-      ],
-      "size": [
-        210,
-        82
-      ],
-      "flags": {},
-      "order": 5,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "INT",
-          "type": "INT",
-          "widget": {
-            "name": "index"
-          },
-          "links": [
-            111
-          ]
-        }
-      ],
-      "properties": {
-        "Run widget replace on values": false,
-        "ue_properties": {
-          "widget_ue_connectable": {},
-          "version": "7.8",
-          "input_ue_unconnectable": {}
-        }
-      },
-      "widgets_values": [
-        56486287703718,
-        "randomize"
-      ]
-    },
-    {
       "id": 37,
       "type": "SaveImage",
       "pos": [
-        2979.807597609481,
-        325.99181077485065
+        2619.9814482456286,
+        421.25434159492033
       ],
       "size": [
         270,
@@ -902,7 +393,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 30,
+      "order": 34,
       "mode": 0,
       "inputs": [
         {
@@ -944,15 +435,15 @@
       "id": 73,
       "type": "UpscaleModelLoader",
       "pos": [
-        2625.081004583376,
-        62.966012765025155
+        2265.2548552195235,
+        158.22854358509503
       ],
       "size": [
         270,
         58
       ],
       "flags": {},
-      "order": 6,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -982,15 +473,15 @@
       "id": 33,
       "type": "LatentUpscaleBy",
       "pos": [
-        2635.833674899616,
-        -83.78989504624386
+        2276.0075255357638,
+        11.472635773825893
       ],
       "size": [
         270,
         82
       ],
       "flags": {},
-      "order": 24,
+      "order": 28,
       "mode": 0,
       "inputs": [
         {
@@ -1027,15 +518,15 @@
       "id": 35,
       "type": "VAEDecode",
       "pos": [
-        2964.8584122782536,
-        102.28145885159395
+        2605.032262914401,
+        197.5439896716638
       ],
       "size": [
         140,
         46
       ],
       "flags": {},
-      "order": 28,
+      "order": 32,
       "mode": 0,
       "inputs": [
         {
@@ -1074,15 +565,15 @@
       "id": 74,
       "type": "ImageUpscaleWithModel",
       "pos": [
-        2680.514029302616,
-        395.48575098524026
+        2320.6878799387637,
+        490.74828180530955
       ],
       "size": [
         233.5689453125,
         46
       ],
       "flags": {},
-      "order": 29,
+      "order": 33,
       "mode": 0,
       "inputs": [
         {
@@ -1121,15 +612,15 @@
       "id": 60,
       "type": "CR Text Concatenate",
       "pos": [
-        2551.5755361183265,
-        261.33871099253406
+        2191.749386754474,
+        356.601241812604
       ],
       "size": [
         210,
         78
       ],
       "flags": {},
-      "order": 18,
+      "order": 20,
       "mode": 0,
       "inputs": [
         {
@@ -1177,21 +668,21 @@
       "id": 32,
       "type": "KSampler",
       "pos": [
-        2301.9586029556826,
-        -69.89483266074762
+        1942.1324535918322,
+        25.367698159322085
       ],
       "size": [
         270,
         262
       ],
       "flags": {},
-      "order": 22,
+      "order": 26,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "MODEL",
-          "link": 57
+          "link": 136
         },
         {
           "name": "positive",
@@ -1229,7 +720,7 @@
         }
       },
       "widgets_values": [
-        342491692333982,
+        846668430919123,
         "randomize",
         20,
         8,
@@ -1242,21 +733,21 @@
       "id": 34,
       "type": "KSampler",
       "pos": [
-        2943.474605847898,
-        7.1692016710048545
+        2583.6484564840457,
+        102.43173249107458
       ],
       "size": [
         270,
         262
       ],
       "flags": {},
-      "order": 26,
+      "order": 30,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "MODEL",
-          "link": 59
+          "link": 138
         },
         {
           "name": "positive",
@@ -1294,7 +785,7 @@
         }
       },
       "widgets_values": [
-        130424610000752,
+        948921752999192,
         "randomize",
         25,
         8,
@@ -1304,35 +795,52 @@
       ]
     },
     {
-      "id": 4,
-      "type": "Text Multiline",
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
       "pos": [
-        137.75975936724257,
-        226.71021963149101
+        483.64038948455936,
+        -72.37063314034776
       ],
       "size": [
-        508.92185858579876,
-        355.96998152240815
+        320,
+        148
       ],
       "flags": {},
-      "order": 7,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
-          "name": "STRING",
-          "type": "STRING",
+          "name": "MODEL",
+          "type": "MODEL",
           "slot_index": 0,
           "links": [
-            93
+            119,
+            131
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            132
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            39
           ]
         }
       ],
-      "title": "4 · CHARAKTER-BASIS (Facial/Hair/Body/Outfit + EMOTION)",
+      "title": "1 · Checkpoint",
       "properties": {
-        "cnr_id": "was-ns",
-        "ver": "3.0.1",
-        "Node name for S&R": "Text Multiline",
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "CheckpointLoaderSimple",
         "ue_properties": {
           "widget_ue_connectable": {},
           "version": "7.8",
@@ -1340,24 +848,254 @@
         }
       },
       "widgets_values": [
-        ""
+        "waiANIHENTAIPONYXL_v60.safetensors"
+      ]
+    },
+    {
+      "id": 81,
+      "type": "Reroute",
+      "pos": [
+        2157.864686197088,
+        258.6298152857292
       ],
-      "color": "#232",
-      "bgcolor": "#353"
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 135
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "MODEL",
+          "links": [
+            136,
+            137,
+            138
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 79,
+      "type": "LoraLoader",
+      "pos": [
+        865.2123473164138,
+        -62.52274236761962
+      ],
+      "size": [
+        320,
+        140
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 131
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 132
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            133
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            134
+          ]
+        }
+      ],
+      "title": "31 · LoRA 2",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "LoraLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "milf_slider_v1.safetensors",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 80,
+      "type": "LoraLoader",
+      "pos": [
+        1244.262787355213,
+        -59.4731773899174
+      ],
+      "size": [
+        320,
+        140
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 133
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 134
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            135
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            139,
+            140
+          ]
+        }
+      ],
+      "title": "31 · LoRA 2",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "LoraLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "detailed_pussy-10.safetensors",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 10,
+      "type": "Text Load Line From File",
+      "pos": [
+        857.5476983459987,
+        424.89364305463545
+      ],
+      "size": [
+        300,
+        180
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "multiline_text",
+          "shape": 7,
+          "type": "STRING",
+          "link": 11
+        },
+        {
+          "name": "index",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "link": 111
+        }
+      ],
+      "outputs": [
+        {
+          "name": "line_text",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            128
+          ]
+        },
+        {
+          "name": "dictionary",
+          "type": "DICT",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "title": "10 · current_action (mode=index)",
+      "properties": {
+        "cnr_id": "was-ns",
+        "ver": "3.0.1",
+        "Node name for S&R": "Text Load Line From File",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "index": true
+          },
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "",
+        "[filename]",
+        "TextBatch",
+        "automatic",
+        0
+      ]
     },
     {
       "id": 5,
       "type": "Text Multiline",
       "pos": [
-        -308.57566080546616,
-        637.8850189913388
+        -181.58802013923943,
+        382.0889380999515
       ],
       "size": [
-        987.0307152303656,
-        474.2656267082077
+        972.1243563573352,
+        384.89568598746905
       ],
       "flags": {},
-      "order": 8,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1388,52 +1126,35 @@
       "bgcolor": "#3f5159"
     },
     {
-      "id": 1,
-      "type": "CheckpointLoaderSimple",
+      "id": 4,
+      "type": "Text Multiline",
       "pos": [
-        336.3043808351624,
-        5.5192884213615665
+        294.1845429146827,
+        137.47694867072696
       ],
       "size": [
-        320,
-        148
+        486.13926949656013,
+        192.19375535787196
       ],
       "flags": {},
-      "order": 9,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
-          "name": "MODEL",
-          "type": "MODEL",
+          "name": "STRING",
+          "type": "STRING",
           "slot_index": 0,
           "links": [
-            119
-          ]
-        },
-        {
-          "name": "CLIP",
-          "type": "CLIP",
-          "slot_index": 1,
-          "links": [
-            120,
-            121
-          ]
-        },
-        {
-          "name": "VAE",
-          "type": "VAE",
-          "slot_index": 2,
-          "links": [
-            39
+            93
           ]
         }
       ],
-      "title": "1 · Checkpoint",
+      "title": "Character",
       "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.21.1",
-        "Node name for S&R": "CheckpointLoaderSimple",
+        "cnr_id": "was-ns",
+        "ver": "3.0.1",
+        "Node name for S&R": "Text Multiline",
         "ue_properties": {
           "widget_ue_connectable": {},
           "version": "7.8",
@@ -1441,24 +1162,508 @@
         }
       },
       "widgets_values": [
-        "Juggernaut_X_RunDiffusion.safetensors"
+        "\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 43,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        803.4033128345654,
+        159.21931082468666
+      ],
+      "size": [
+        334.59688954878595,
+        178
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": []
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "showAllGraphs": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 61,
+      "type": "SeedGenerator",
+      "pos": [
+        1172.2388062183431,
+        169.7740923383014
+      ],
+      "size": [
+        330.8974363561406,
+        102
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SEED",
+          "type": "INT",
+          "links": [
+            84
+          ]
+        },
+        {
+          "name": "seed+1",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "RES4LYF",
+        "ver": "0dc91c00c4c3fb38e7874fcd7a2a327765e8882c",
+        "Node name for S&R": "SeedGenerator",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        514987554547250,
+        "randomize"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 64,
+      "type": "> Save Text",
+      "pos": [
+        1604.7851642541852,
+        -52.23412695623128
+      ],
+      "size": [
+        270,
+        102
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 115
+        },
+        {
+          "name": "filename_opt",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "ComfyUI_yanc",
+        "ver": "923c366c2937cf6ce55e8a808e29f23831281bb5",
+        "Node name for S&R": "> Save Text",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "ComfyUI",
+        ""
       ]
     },
     {
-      "id": 3,
-      "type": "Text Multiline",
+      "id": 17,
+      "type": "CLIPTextEncode",
       "pos": [
-        1075.2582636995842,
-        895.0495402767084
+        1603.3630566348559,
+        121.98771021044433
       ],
       "size": [
-        550.5429411941822,
-        441.4673120150336
+        300,
+        140
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 139
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 116
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            42,
+            43,
+            44
+          ]
+        }
+      ],
+      "title": "17 · Positive Conditioning",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "text": true
+          },
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 18,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1600.3567357189202,
+        344.91355952972606
+      ],
+      "size": [
+        300,
+        140
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 140
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            45,
+            46,
+            47
+          ]
+        }
+      ],
+      "title": "18 · Negative Conditioning",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "CLIPTextEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {
+            "text": true
+          },
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 46,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1608.055161497182,
+        558.6629191604934
+      ],
+      "size": [
+        270,
+        156
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            54,
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.21.1",
+        "Node name for S&R": "EmptyLatentImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        640,
+        704,
+        1
+      ]
+    },
+    {
+      "id": 13,
+      "type": "Text Concatenate",
+      "pos": [
+        1206.9170571587963,
+        345.05184123898533
+      ],
+      "size": [
+        320,
+        160
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 93
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 128
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": 141
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": 129
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            115,
+            116
+          ]
+        }
+      ],
+      "title": "13 · SYSTEM-Prompt (Regel + Basis)",
+      "properties": {
+        "cnr_id": "was-ns",
+        "ver": "3.0.1",
+        "Node name for S&R": "Text Concatenate",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "_",
+        "true"
+      ]
+    },
+    {
+      "id": 58,
+      "type": "> Int to Text",
+      "pos": [
+        1253.1630193176586,
+        558.5527051925762
+      ],
+      "size": [
+        270,
+        132
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "int",
+          "type": "INT",
+          "link": 84
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            80,
+            82
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_yanc",
+        "ver": "923c366c2937cf6ce55e8a808e29f23831281bb5",
+        "Node name for S&R": "> Int to Text",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.6.2"
+        }
+      },
+      "widgets_values": [
+        false,
+        0
+      ]
+    },
+    {
+      "id": 69,
+      "type": "PrimitiveNode",
+      "pos": [
+        902.8820391011476,
+        659.1177351843344
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "links": [
+            111
+          ]
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        0,
+        "increment"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Text Multiline",
+      "pos": [
+        896.428540059025,
+        799.3590089602985
+      ],
+      "size": [
+        237.3545300550295,
+        337.19318178069716
       ],
       "flags": {
         "collapsed": false
       },
       "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            129
+          ]
+        }
+      ],
+      "title": "2 · STYLE-PROMPT (fix)",
+      "properties": {
+        "cnr_id": "was-ns",
+        "ver": "3.0.1",
+        "Node name for S&R": "Text Multiline",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.8",
+          "input_ue_unconnectable": {}
+        }
+      },
+      "widgets_values": [
+        "# Style\n(depus: 1.0);\n(photorealistic: 1.4); (8k uhd: 1.2); (high quality: 1.3);\n(realistic skin texture: 1.3); (natural skin tone: 1.4); (subsurface scattering: 1.3);\n(detailed eyes: 1.3); (realistic proportions: 1.3);\n(natural lighting: 1.3); (soft shadows: 1.2); (film grain: 1.1);\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "Text Multiline",
+      "pos": [
+        1167.1338967439747,
+        798.918958067889
+      ],
+      "size": [
+        368.61474329633404,
+        355.4468598040104
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 11,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1483,26 +1688,24 @@
         }
       },
       "widgets_values": [
-        ""
+        "anime:1.9, manga:1.9, cartoon:1.8, illustration:1.7, 2d:1.7,\nanime eyes:1.9, oversized eyes:1.8, sparkly eyes:1.5,\ncel shading:1.8, flat colors:1.6, line art:1.6,\nsimplified anatomy:1.6, plastic skin:1.4, smooth skin:1.3,\ndeformed eyes:1.5, bad eyes:1.5, multiple pupils:1.5,\nmultiple women:1.4, low quality:1.3\n\nno camera visible, no photography equipment, no photographer\n\npointing, finger pointing, hand gesture, reaching, waving, peace sign, \nextended arms, beckoning, grabbing air, unnatural hand pose\n\ndeformed, distorted, disfigured, bad anatomy, extra limbs, mutated hands, poorly drawn hands, poorly drawn face, mutation, ugly, blurry, bad proportions, extra fingers, missing fingers, low quality, worst quality\n\n"
       ],
       "color": "#322",
       "bgcolor": "#533"
     },
     {
-      "id": 2,
+      "id": 76,
       "type": "Text Multiline",
       "pos": [
-        879.144992457596,
-        628.5626913575378
+        238.74030098916208,
+        847.8210711925894
       ],
       "size": [
-        237.72497285687814,
-        197.0616242202659
+        597.7851752527803,
+        271.3315021631232
       ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 11,
+      "flags": {},
+      "order": 12,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -1511,11 +1714,11 @@
           "type": "STRING",
           "slot_index": 0,
           "links": [
-            94
+            141
           ]
         }
       ],
-      "title": "2 · STYLE-PROMPT (fix)",
+      "title": "Appearance & Surrounding",
       "properties": {
         "cnr_id": "was-ns",
         "ver": "3.0.1",
@@ -1679,30 +1882,6 @@
       "LATENT"
     ],
     [
-      57,
-      47,
-      0,
-      32,
-      0,
-      "MODEL"
-    ],
-    [
-      58,
-      47,
-      0,
-      41,
-      0,
-      "MODEL"
-    ],
-    [
-      59,
-      47,
-      0,
-      34,
-      0,
-      "MODEL"
-    ],
-    [
       79,
       57,
       0,
@@ -1767,22 +1946,6 @@
       "STRING"
     ],
     [
-      94,
-      2,
-      0,
-      13,
-      1,
-      "STRING"
-    ],
-    [
-      109,
-      10,
-      0,
-      13,
-      2,
-      "STRING"
-    ],
-    [
       111,
       69,
       0,
@@ -1839,20 +2002,108 @@
       "MODEL"
     ],
     [
-      120,
+      128,
+      10,
+      0,
+      13,
       1,
+      "STRING"
+    ],
+    [
+      129,
+      2,
+      0,
+      13,
+      3,
+      "STRING"
+    ],
+    [
+      131,
+      1,
+      0,
+      79,
+      0,
+      "MODEL"
+    ],
+    [
+      132,
+      1,
+      1,
+      79,
+      1,
+      "CLIP"
+    ],
+    [
+      133,
+      79,
+      0,
+      80,
+      0,
+      "MODEL"
+    ],
+    [
+      134,
+      79,
+      1,
+      80,
+      1,
+      "CLIP"
+    ],
+    [
+      135,
+      80,
+      0,
+      81,
+      0,
+      "MODEL"
+    ],
+    [
+      136,
+      81,
+      0,
+      32,
+      0,
+      "MODEL"
+    ],
+    [
+      137,
+      81,
+      0,
+      41,
+      0,
+      "MODEL"
+    ],
+    [
+      138,
+      81,
+      0,
+      34,
+      0,
+      "MODEL"
+    ],
+    [
+      139,
+      80,
       1,
       17,
       0,
       "CLIP"
     ],
     [
-      121,
-      1,
+      140,
+      80,
       1,
       18,
       0,
       "CLIP"
+    ],
+    [
+      141,
+      76,
+      0,
+      13,
+      2,
+      "STRING"
     ]
   ],
   "groups": [
@@ -1860,10 +2111,10 @@
       "id": 5,
       "title": "high res",
       "bounding": [
-        2291.9586029556826,
-        -139.89483266074765,
-        938.1381451041289,
-        705.5457715448874
+        1932.132453591832,
+        -44.632301840677904,
+        948.7406363437599,
+        602.9126420049145
       ],
       "color": "#3f789e",
       "flags": {}
@@ -1872,8 +2123,8 @@
       "id": 6,
       "title": "low res",
       "bounding": [
-        1874.224022241879,
-        640.2103579015936,
+        1934.051440401439,
+        589.982836787182,
         946.675943803581,
         358.25795703125004
       ],
@@ -1885,10 +2136,10 @@
   "extra": {
     "ue_links": [],
     "ds": {
-      "scale": 0.1,
+      "scale": 0.3452271214393107,
       "offset": [
-        6188.789817471401,
-        5274.5396974159685
+        1542.8655879083235,
+        972.5392089472634
       ]
     },
     "links_added_by_ue": [],

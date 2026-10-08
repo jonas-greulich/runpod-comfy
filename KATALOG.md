@@ -1,6 +1,6 @@
 # Katalog runpod-comfy
 
-Stand: 07.10.2026. Diese Datei ist die Übersicht über alles, was auf RunPod läuft. Wer etwas ändert (Modell, Workflow, Template, Skript), trägt es hier im selben Commit ein.
+Stand: 08.10.2026. Diese Datei ist die Übersicht über alles, was auf RunPod läuft. Wer etwas ändert (Modell, Workflow, Template, Skript), trägt es hier im selben Commit ein.
 
 ## Ablage auf dem Mac
 
@@ -66,7 +66,7 @@ LTX-2.5 (Lightricks), alle Nodes nativ in ComfyUI v0.39.1.
 
 | Profil | Datei | Herkunft |
 |---|---|---|
-| bild | `workflows/bild/comic_panels_11.json` | Jonas, Comic-Panels mit Load-Checkpoint-Auswahl |
+| bild | `workflows/bild/comic_panels_11.json` | Jonas, Comic-Panels mit Load-Checkpoint-Auswahl, Stand 08.10. (Style/Negative vorbelegt, zwei weitere LoRA-Loader, Node Appearance & Surrounding) |
 | ltx | `workflows/ltx/LTX-2.5 Text to Video.json` | offizielle ComfyUI-Vorlage |
 | ltx | `workflows/ltx/LTX-2.5 Image to Video.json` | offizielle ComfyUI-Vorlage |
 | ltx | `workflows/ltx/LTX-2.5 Start-Endbild.json` | offizielle ComfyUI-Vorlage |
@@ -80,6 +80,8 @@ LTX-2.5 (Lightricks), alle Nodes nativ in ComfyUI v0.39.1.
 5. **Beenden:** Console → Stop (Disk bleibt, kostet weiter Speicher) oder Terminate (alles weg). Die Ergebnisse liegen dann schon auf dem Mac.
 
 ## Regeln
+
+- Workflows, die auf dem Pod geändert und gespeichert werden, sind beim Terminieren weg. Ins Template kommt eine Änderung nur per Export (Workflow → Export) und Austausch der Datei unter `workflows/<profil>/`. `start.sh` überschreibt beim Start die Pod-Version mit der Repo-Version.
 
 - Neue Modelle, Workflows oder Custom Nodes kommen nur über dieses Repo dazu (Profil-Datei, `workflows/<profil>/`, `custom_nodes.txt`) und werden hier eingetragen. Was nur auf einem laufenden Pod installiert wird, ist beim nächsten Pod weg.
 - Ein neues Profil heißt: `profiles/<name>.txt`, `workflows/<name>/`, Template in RunPod mit `PROFILE=<name>`, Zeile in den Tabellen oben.
